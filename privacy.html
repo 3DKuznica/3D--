@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Согласие на обработку персональных данных | 3D-кузница</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg: #1a1d24;
+    --accent: #f6ce2c;
+    --text: #ffffff;
+    --text-muted: #9ba1a9;
+    --border: #313641;
+    --radius: 12px;
+  }
+  body { 
+    font-family: 'Inter', sans-serif; 
+    background-color: var(--bg); 
+    color: var(--text); 
+    line-height: 1.7; 
+  }
+  h1, h2, h3, .logo-text { font-family: 'Montserrat', sans-serif; }
+  .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+  a { text-decoration: none; color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  /* ШАПКА */
+  header { padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo img { height: 48px; width: auto; }
+  .logo-text { font-size: 24px; font-weight: 800; color: var(--accent); }
+  .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); font-weight: 500; transition: 0.2s; }
+  .back-btn:hover { color: var(--accent); }
+
+  /* КОНТЕНТ */
+  .privacy-content { padding: 60px 0 80px; }
+  h1 { 
+    font-size: 32px; 
+    color: var(--accent); 
+    margin-bottom: 30px; 
+    line-height: 1.3;
+  }
+  h2 { 
+    font-size: 20px; 
+    margin-top: 32px; 
+    margin-bottom: 12px; 
+    color: var(--text);
+  }
+  p { 
+    margin-bottom: 16px; 
+    color: var(--text-muted); 
+    font-size: 15px;
+  }
+  ul { 
+    margin-bottom: 16px; 
+    padding-left: 20px; 
+    color: var(--text-muted); 
+    font-size: 15px;
+  }
+  li { margin-bottom: 8px; }
+  strong { color: var(--text); }
+  
+  .contact-info {
+    margin-top: 30px;
+    padding: 20px;
+    background: #232730;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .contact-info p { margin-bottom: 8px; }
+  .contact-info a { color: var(--accent); font-weight: 600; }
+  .contact-info a:hover { text-decoration: underline; }
+
+  /* ПОДВАЛ */
+  footer { border-top: 1px solid var(--border); padding: 30px 0; text-align: center; color: var(--text-muted); font-size: 14px; }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 26px; }
+    .privacy-content { padding: 40px 0 60px; }
+  }
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <img src="logo.png" alt="3D-кузница">
+        <span class="logo-text">3D-кузница</span>
+      </a>
+      <a href="index.html" class="back-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        На главную
+      </a>
+    </div>
+  </header>
+
+  <main class="privacy-content">
+    <div class="container">
+      <h1>Согласие на обработку персональных данных</h1>
+      
+      <p>Настоящим я, субъект персональных данных, действуя свободно, своей волей и в своем интересе, даю согласие Мастерской «3D-кузница» (далее — Оператор) на обработку моих персональных данных на следующих условиях.</p>
+
+      <h2>1. Перечень персональных данных</h2>
+      <p>Я даю согласие на обработку следующих персональных данных, которые я добровольно указываю в форме заявки на сайте:</p>
+      <ul>
+        <li>Имя (или псевдоним);</li>
+        <li>Номер контактного телефона;</li>
+        <li>Адрес электронной почты;</li>
+        <li>Текст сообщения (описание задачи);</li>
+        <li>Прикрепленные файлы (3D-модели, чертежи, фотографии).</li>
+      </ul>
+
+      <h2>2. Цели обработки</h2>
+      <p>Мои персональные данные обрабатываются исключительно в следующих целях:</p>
+      <ul>
+        <li>Обратная связь со мной по вопросам оформления заявки;</li>
+        <li>Расчет стоимости услуг 3D-печати, сканирования, моделирования и фрезеровки;</li>
+        <li>Выполнение заказа и организация доставки (например, через службу СДЭК);</li>
+        <li>Разрешение возможных спорных ситуаций.</li>
+      </ul>
+
+      <h2>3. Действия с персональными данными</h2>
+      <p>Оператор вправе совершать следующие действия с моими персональными данными: сбор, запись, систематизация, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передача (предоставление, доступ) курьерским службам (для доставки), блокирование, удаление и уничтожение.</p>
+
+      <h2>4. Срок действия и отзыв согласия</h2>
+      <p>Согласие действует с момента его предоставления (нажатия кнопки «Отправить заявку») и до момента его отзыва. Я могу отозвать свое согласие в любой момент, направив письменное уведомление на контактный email Оператора.</p>
+
+      <h2>5. Конфиденциальность</h2>
+      <p>Оператор обязуется не передавать мои персональные данные третьим лицам, за исключением случаев, прямо предусмотренных законодательством РФ (например, правоохранительным органам), или для целей логистики (доставка).</p>
+
+      <div class="contact-info">
+        <p><strong>Данные Оператора:</strong></p>
+        <p>Мастерская «3D-кузница»</p>
+        <p>Ответственный за обработку данных: <strong>Коровин Е.С.</strong></p>
+        <p>Email для связи и отзыва согласия: <a href="mailto:kuznitsa3d@yandex.ru">kuznitsa3d@yandex.ru</a></p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 3D-кузница. Все права защищены.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

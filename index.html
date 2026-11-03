@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D-кузница | Мастерская 3D-печати в Ярославле</title>
+<meta name="description" content="Печатаем детали, изделия и прототипы на 3D-принтере. От простых моделей до сложных инженерных решений.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --bg: #1a1d24;
+    --bg-card: #232730;
+    --bg-input: #15181e;
+    --accent: #f6ce2c;
+    --accent-hover: #ffdb4d;
+    --text: #ffffff;
+    --text-muted: #9ba1a9;
+    --border: #313641;
+    --radius: 12px;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, .logo-text, .btn, .nav-link { font-family: 'Montserrat', sans-serif; }
+  .container{ max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  a{ text-decoration: none; color: inherit; }
+  img{ display: block; max-width: 100%; object-fit: cover; }
+  ul{ list-style: none; }
+
+  /* КНОПКИ */
+  .btn{
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 16px 28px; border-radius: 99px; font-weight: 600; font-size: 15px;
+    transition: 0.25s; cursor: pointer; border: none;
+  }
+  .btn-primary{ background: var(--accent); color: #111; box-shadow: 0 4px 15px rgba(246, 206, 44, 0.2); }
+  .btn-primary:hover{ background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(246, 206, 44, 0.3); }
+  .btn-outline{ background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+  .btn-outline:hover{ background: rgba(246, 206, 44, 0.1); }
+  .btn-link{ background: transparent; color: var(--text); padding: 16px 0; }
+  .btn-link:hover{ color: var(--accent); }
+  .btn-link svg{ transition: 0.2s; }
+  .btn-link:hover svg{ transform: translateX(4px); }
+  .icon{ width: 24px; height: 24px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ШАПКА */
+  header{ padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .header-inner{ display: flex; align-items: center; justify-content: space-between; }
+  .logo{ display: flex; align-items: center; gap: 12px; }
+  .logo img{ height: 48px; width: auto; }
+  .logo-text{ font-size: 24px; font-weight: 800; letter-spacing: -0.5px; color: var(--accent); text-shadow: 0 0 10px rgba(246, 206, 44, 0.3); }
+  .nav{ display: flex; gap: 32px; align-items: center; }
+  .nav-link{ font-size: 14px; font-weight: 500; color: var(--text-muted); position: relative; padding-bottom: 6px; transition: 0.2s; }
+  .nav-link:hover, .nav-link.active{ color: var(--text); }
+  .nav-link.active::after{ content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--accent); border-radius: 2px; }
+  .header-btn{ padding: 12px 24px; font-size: 14px; }
+
+  /* ГЛАВНЫЙ ЭКРАН */
+  .hero{ padding: 80px 0; }
+  .hero-inner{ display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .hero-badge{ font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; display: block; }
+  .hero h1{ font-size: 52px; line-height: 1.1; font-weight: 700; margin-bottom: 24px; }
+  .hero h1 span{ color: var(--accent); }
+  .hero p{ font-size: 18px; color: var(--text-muted); max-width: 480px; margin-bottom: 40px; }
+  .hero-actions{ display: flex; gap: 24px; align-items: center; }
+  
+  /* ССЫЛКА НА КАРТИНКУ ГЛАВНОГО ЭКРАНА */
+  .hero-image{ border-radius: 20px; overflow: hidden; position: relative; background: #2a2f38 url('images/hero.jpg') center/cover; aspect-ratio: 4/3; }
+
+  /* ПРЕИМУЩЕСТВА */
+  .features{ padding: 40px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .features-grid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+  .feature-item{ display: flex; gap: 16px; align-items: flex-start; }
+  .feature-icon{ width: 48px; height: 48px; background: rgba(246, 206, 44, 0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .feature-text h4{ font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .feature-text p{ font-size: 13px; color: var(--text-muted); line-height: 1.4; }
+
+  /* ПОПУЛЯРНЫЕ ИЗДЕЛИЯ */
+  .products{ padding: 80px 0; }
+  .section-header{ display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; }
+  .section-header h2{ font-size: 32px; font-weight: 700; }
+  .section-header h2::after{ content: ''; display: block; width: 60px; height: 3px; background: var(--accent); margin-top: 12px; border-radius: 2px; }
+  .products-grid{ display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .product-card{ background: var(--bg-card); border-radius: var(--radius); overflow: hidden; transition: 0.3s; cursor: pointer; }
+  .product-card:hover{ transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+  .product-img{ width: 100%; aspect-ratio: 1/1; background: #15181e; }
+  .product-info{ padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+  .product-info h4{ font-size: 15px; font-weight: 500; }
+  .product-info svg{ width: 20px; height: 20px; stroke: var(--text-muted); transition: 0.2s; }
+  .product-card:hover .product-info svg{ stroke: var(--accent); transform: translateX(4px); }
+
+  /* О НАС */
+  .about{ padding: 80px 0; border-top: 1px solid var(--border); }
+  
+  /* Верхняя полоса с преимуществами */
+  .about-features-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border); /* Вот наша полоса-разделитель */
+    margin-bottom: 50px;
+  }
+  .about-feature { display: flex; gap: 16px; align-items: flex-start; }
+  .about-feature .icon { width: 32px; height: 32px; flex-shrink: 0; }
+  .about-feature h4 { font-size: 16px; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+  .about-feature p { font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 0; }
+  
+  /* Нижняя часть: Текст и картинка */
+  .about-inner{ 
+    display: grid; 
+    grid-template-columns: 1.2fr 1fr; /* Текст чуть шире, чем картинка */
+    gap: 60px; 
+    align-items: center; 
+  }
+  .about-content h2 { font-size: 32px; font-weight: 700; margin-bottom: 16px; }
+  .about-content h2::after { 
+    content: ''; display: block; width: 60px; height: 3px; 
+    background: var(--accent); margin-top: 12px; border-radius: 2px; margin-bottom: 24px;
+  }
+  .about-content p { font-size: 15px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.7; }
+  .about-content strong { color: var(--text); }
+  .about-content ul {
+    list-style: disc; padding-left: 20px; margin-bottom: 16px;
+    color: var(--text-muted); font-size: 15px; line-height: 1.7;
+  }
+  .about-content li { margin-bottom: 8px; }
+  
+  .about-image{ border-radius: var(--radius); overflow: hidden; aspect-ratio: 4/5; }
+  .about-image img{ width: 100%; height: 100%; object-fit: cover; }
+
+  /* ПОДВАЛ */
+  footer{ background: #15181e; padding: 40px 0; }
+  .footer-inner{ display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+  .footer-left{ display: flex; align-items: center; gap: 12px; }
+  .footer-left img{ height: 40px; width: auto; }
+  .footer-left span{ font-family: 'Montserrat', sans-serif; font-size: 20px; font-weight: 700; }
+  .footer-center{ display: flex; align-items: center; gap: 24px; }
+  .footer-center-text{ font-size: 16px; font-weight: 500; max-width: 200px; line-height: 1.3; }
+  .footer-center-text strong{ display: block; font-size: 18px; }
+  .footer-right{ display: flex; align-items: center; gap: 16px; }
+  .social-link{ width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+  .social-link:hover{ border-color: var(--accent); background: rgba(246, 206, 44, 0.1); }
+  .social-link svg{ width: 20px; height: 20px; fill: var(--accent); }
+  
+  /* КОНТАКТЫ ВНИЗУ */
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 20px; margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 14px; flex-wrap: wrap; }
+  .contact-item { display: flex; align-items: center; gap: 8px; }
+  .contact-item span { color: var(--text-muted); opacity: 0.7; }
+  .contact-item a { color: var(--text); font-weight: 500; transition: 0.2s; }
+  .contact-item a:hover { color: var(--accent); }
+
+  /* ФОРМА ЗАЯВКИ */
+  .contact-form-wrapper {
+    max-width: 800px;
+    margin: 50px auto 0;
+    padding: 40px;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+  }
+  .contact-form-wrapper h3 {
+    font-size: 26px;
+    margin-bottom: 8px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+  }
+  .contact-form-wrapper > p {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 30px;
+    font-size: 14px;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group label { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+  .form-group input, .form-group textarea {
+    width: 100%; padding: 12px 14px; background: var(--bg-input);
+    border: 1px solid var(--border); border-radius: 8px; color: var(--text);
+    font-family: 'Inter', sans-serif; font-size: 14px; transition: 0.2s;
+  }
+  .form-group input:focus, .form-group textarea:focus {
+    outline: none; border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(246, 206, 44, 0.15);
+  }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: #5a6270; }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-group input[type="file"] { padding: 8px; cursor: pointer; }
+  .form-group input[type="file"]::file-selector-button {
+    background: var(--bg); color: var(--accent); border: 1px solid var(--border);
+    padding: 6px 12px; border-radius: 6px; cursor: pointer;
+    font-family: 'Inter', sans-serif; font-size: 13px; margin-right: 10px; transition: 0.2s;
+  }
+  .form-group input[type="file"]::file-selector-button:hover { border-color: var(--accent); }
+  .btn-submit { width: 100%; padding: 16px; margin-top: 8px; }
+  .form-privacy {
+    font-size: 12px; color: var(--text-muted); text-align: center;
+    margin-top: 8px; line-height: 1.5;
+  }
+  .form-privacy a { color: var(--accent); text-decoration: underline; }
+  .form-privacy a:hover { color: var(--accent-hover); }
+
+  
+ /* Желтые заголовки на главной */
+  .section-header h2,
+  .about-content h2,
+  .footer-left span,
+  .contact-form-wrapper h3 {
+    color: var(--accent) !important;
+  }
+  /* Желтые контакты внизу */
+  .contact-item,
+  .contact-item a {
+    color: var(--accent) !important;
+    font-weight: 600;
+  }
+  
+  .contact-item a:hover {
+    color: var(--accent-hover) !important;
+  }
+
+  /* АДАПТИВНОСТЬ */
+  @media (max-width: 1024px) {
+    .hero h1{ font-size: 42px; }
+    .features-grid{ grid-template-columns: repeat(2, 1fr); }
+    .products-grid{ grid-template-columns: repeat(2, 1fr); }
+    .about-inner{ grid-template-columns: 1fr 1fr; }
+    .about-features{ grid-column: 1 / -1; flex-direction: row; justify-content: space-between; }
+    .footer-inner{ flex-direction: column; text-align: center; }
+    .footer-left, .footer-center, .footer-right { justify-content: center; }
+    .footer-center { flex-direction: column; gap: 16px; }
+  }
+  @media (max-width: 768px) {
+    .nav, .header-btn { display: none; }
+    .hero-inner{ grid-template-columns: 1fr; text-align: center; }
+    .hero p{ margin: 0 auto 30px; }
+    .hero-actions{ justify-content: center; }
+    .about-inner{ grid-template-columns: 1fr; }
+    .about-features{ flex-direction: column; }
+    .section-header{ flex-direction: column; align-items: flex-start; gap: 16px; }
+    .footer-center-text{ max-width: 100%; }
+    .products-grid{ grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-form-wrapper { padding: 24px; }
+    .about-features-row { grid-template-columns: 1fr; gap: 20px; }
+    .about-inner { grid-template-columns: 1fr; gap: 32px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ШАПКА -->
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <img src="logo.png" alt="3D-кузница">
+        <span class="logo-text">3D-кузница</span>
+      </a>
+      <nav class="nav">
+        <a href="#" class="nav-link active">Главная</a>
+        <a href="#services" class="nav-link">Услуги</a>
+        <a href="#about" class="nav-link">О нас</a>
+        <a href="#contacts" class="nav-link">Контакты</a>
+      </nav>
+      <a href="#contacts" class="btn btn-outline header-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        Оставить заявку
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <!-- ГЛАВНЫЙ ЭКРАН -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <span class="hero-badge">Мастерская 3D-печати</span>
+          <h1><span>3D-кузница</span> — ваши идеи в реальность</h1>
+          <p>Печатаем детали, изделия и прототипы на 3D-принтере. От простых моделей до сложных инженерных решений.</p>
+          <div class="hero-actions">
+            <a href="#contacts" class="btn btn-primary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+              Рассчитать заказ
+            </a>
+            <a href="#services" class="btn btn-link">
+              Наши услуги
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+          </div>
+        </div>
+        <div class="hero-image"></div>
+      </div>
+    </section>
+
+    <!-- ПРЕИМУЩЕСТВА -->
+    <section class="features" id="services">
+      <div class="container features-grid">
+        <div class="feature-item">
+          <div class="feature-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg></div>
+          <div class="feature-text"><h4>Высокое качество</h4><p>Точные размеры и аккуратная проработка деталей</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+          <div class="feature-text"><h4>Быстрое изготовление</h4><p>Оперативное выполнение заказов</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><svg class="icon" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg></div>
+          <div class="feature-text"><h4>Разные материалы</h4><p>PLA, PETG, ABS, TPU и другие</p></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg></div>
+          <div class="feature-text"><h4>Индивидуальный подход</h4><p>Изготовим по вашему чертежу или эскизу</p></div>
+        </div>
+      </div>
+    </section>
+
+        <!-- УСЛУГИ -->
+    <section class="products" id="services">
+      <div class="container">
+        <div class="section-header">
+          <h2>Наши услуги</h2>
+          <a href="#contacts" class="btn btn-link" style="color: var(--accent);">Заказать <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+        </div>
+        
+        <!-- Ряд с технологиями -->
+        <div class="products-grid">
+        <!-- 3D Печать (Кликабельная) -->
+          <a href="3d-print.html" class="product-card" style="display: block;">
+            <div class="product-img" style="display: flex; align-items: center; justify-content: center; background: #1a1d24;">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"></path><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+            </div>
+            <div class="product-info"><h4>3D-печать</h4><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+          </a>
+        <!-- 3D Сканирование (Кликабельная) -->
+          <a href="3d-scan.html" class="product-card" style="display: block;">
+            <div class="product-img" style="display: flex; align-items: center; justify-content: center; background: #1a1d24;">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7V5a2 2 0 0 1 2-2h2"></path><path d="M17 3h2a2 2 0 0 1 2 2v2"></path><path d="M21 17v2a2 2 0 0 1-2 2h-2"></path><path d="M7 21H5a2 2 0 0 1-2-2v-2"></path><circle cx="12" cy="12" r="3"></circle><path d="M12 9v3l2 2"></path></svg>
+            </div>
+            <div class="product-info"><h4>3D-сканирование</h4><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+          </a>
+          <!-- 3D Моделирование (Кликабельная) -->
+          <a href="3d-modeling.html" class="product-card" style="display: block;">
+            <div class="product-img" style="display: flex; align-items: center; justify-content: center; background: #1a1d24;">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            </div>
+            <div class="product-info"><h4>3D-моделирование</h4><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+          </a>
+          <!-- Реверс-инжиниринг (Кликабельная) -->
+          <a href="3d-reverse.html" class="product-card" style="display: block;">
+            <div class="product-img" style="display: flex; align-items: center; justify-content: center; background: #1a1d24;">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+              </svg>
+            </div>
+            <div class="product-info"><h4>Реверс-инжиниринг</h4><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div>
+          </a>
+
+      </div>
+    </section>
+
+       <!-- О НАС -->
+    <section class="about" id="about">
+      <div class="container">
+        
+        <!-- ВЕРХНЯЯ ПОЛОСА С ПРЕИМУЩЕСТВАМИ -->
+        <div class="about-features-row">
+          <div class="about-feature">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            <div><h4>Собственное оборудование</h4><p>Современные 3D-принтеры и качественные материалы</p></div>
+          </div>
+          <div class="about-feature">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <div><h4>Опыт более 8 лет</h4><p>Успешно реализуем проекты любой сложности</p></div>
+          </div>
+          <div class="about-feature">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <div><h4>Довольные клиенты</h4><p>Более 1000 успешно выполненных заказов</p></div>
+          </div>
+        </div>
+
+        <!-- НИЖНЯЯ ЧАСТЬ: Текст слева, картинка справа -->
+        <div class="about-inner">
+          <div class="about-content">
+            <h2>О нашей мастерской</h2>
+            
+            <p>Мы — 3D-кузница, мастерская, где современные технологии и креативные идеи превращаются в реальные изделия. Делаем всё: от прототипов и запасных частей до уникальных подарков и дизайнерских предметов.</p>
+            
+            <p>Мы работаем в сфере 3D-печати и моделирования <strong>уже более 8 лет</strong>. За это время мы прошли путь от первых экспериментов до полноценной мастерской, которая закрывает задачи любой сложности.</p>
+            
+            <p>Наш опыт позволяет нам не просто «нажимать кнопку Старт», а подбирать оптимальную технологию под ваш запрос:</p>
+            
+            <ul>
+              <li><strong>FDM-печать:</strong> идеально подходит для создания прочных функциональных деталей, корпусов, запчастей и прототипов. Работаем с PLA, PETG, ABS, TPU, PA и различными инженерными материалами.</li>
+              <li><strong>Фотополимерная печать (смола):</strong> используется там, где важна высочайшая детализация — фигурки, миниатюры, ювелирные мастер-модели. Также работаем с инженерными смолами.</li>
+            </ul>
+            
+            <p>За 8 лет мы выполнили более тысячи успешных заказов: от мелкого ремонта бытовой техники и восстановления редких автозапчастей до создания кастомного тюнинга и архитектурных макетов.</p>
+          </div>
+
+          <div class="about-image">
+            <img src="images/about.jpg" alt="3D принтер в работе">
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  <!-- ПОДВАЛ -->
+    <!-- ПОДВАЛ С ФОРМОЙ -->
+  <footer id="contacts">
+    <div class="container">
+
+      <!-- Верхняя часть -->
+      <div class="footer-inner">
+        <div class="footer-left">
+          <img src="logo.png" alt="3D-кузница">
+          <span>3D-кузница</span>
+        </div>
+        <div class="footer-center">
+          <div class="footer-center-text">
+            <strong>Есть идея?</strong>
+            Мы поможем воплотить её в 3D!
+          </div>
+        </div>
+        <div class="footer-right">
+          <a href="https://t.me/ВАШ_НИК" target="_blank" class="social-link" aria-label="Telegram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          </a>
+          <a href="https://vk.com/ВАША_ГРУППА" target="_blank" class="social-link" aria-label="VK">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13.162 18.994c.609 0 .858-.406.851-.915-.031-1.917.714-2.949 2.059-1.604 1.488 1.488 1.796 2.519 3.603 2.519h3.2c.808 0 1.126-.26 1.126-.668 0-.863-1.421-2.386-2.625-3.504-1.686-1.565-1.765-1.602-.313-3.486 1.801-2.339 4.157-5.336 2.073-5.336h-3.981c-.772 0-.828.435-1.103 1.083-.995 2.347-2.886 5.387-3.604 4.922-.751-.485-.407-2.406-.35-5.261.015-.754.011-1.271-1.141-1.539-.814-.18-1.63-.239-2.323-.239-1.256 0-2.056.293-2.614.778-.37.322-.527.747-.257.77.507.04 1.238.41 1.533 1.262.345.99.29 2.63.29 3.353 0 1.35-.325 2.045-1.512 2.045-1.223 0-2.026-.764-2.678-1.667-1.192-1.65-2.059-4.578-2.118-5.026-.072-.556-.474-.803-1.121-.803H2.147c-.715 0-.858.405-.858.914 0 .843.873 3.421 2.4 5.915 1.834 2.995 4.272 4.503 6.832 4.503h2.641z"/></svg>
+          </a>
+          <a href="https://max.ru/ВАШ_НИК" target="_blank" class="social-link" aria-label="МАКС">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12c0 5.52 4.48 10 10 10s10-4.48 10-10C22 6.48 17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- ФОРМА ЗАЯВКИ -->
+      <div class="contact-form-wrapper">
+        <h3>Оставить заявку</h3>
+        <p>Заполните форму — я свяжусь с вами в течение дня</p>
+
+        <!-- ВАЖНО: Замени kuznitsa3d@yandex.ru на свой реальный email в action="" -->
+        <form id="contactForm" class="contact-form" action="https://formsubmit.co/kuznitsa3d@yandex.ru" method="POST" enctype="multipart/form-data">
+          
+          <!-- Скрытые настройки FormSubmit -->
+          <input type="hidden" name="_subject" value="Новая заявка с сайта 3D-кузница">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ваше имя *</label>
+              <input type="text" name="name" placeholder="Как к вам обращаться" required>
+            </div>
+            <div class="form-group">
+              <label>Телефон *</label>
+              <input type="tel" name="phone" id="phoneInput" placeholder="+7 (___) ___-__-__" required pattern="\+7\s?\(?\d{3}\)?\s?\d{3}-?\d{2}-?\d{2}" title="Введите номер в формате +7 (XXX) XXX-XX-XX">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" name="email" placeholder="you@example.ru">
+            </div>
+            <div class="form-group">
+              <label>Прикрепить файл (до 10 МБ)</label>
+              <input type="file" name="attachment" accept=".stl,.obj,.step,.stp,.3mf,.igs,.iges,.zip,.rar,.jpg,.jpeg,.png,.pdf">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Сообщение *</label>
+            <textarea name="message" placeholder="Опишите, что нужно напечатать: размер, материал, сроки..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-submit">Отправить заявку</button>
+
+          <p class="form-privacy">
+            Нажимая на кнопку, вы принимаете <a href="privacy.html" target="_blank">согласие на обработку персональных данных</a>
+          </p>
+        </form>
+      </div>
+
+      <!-- Нижняя строка с контактами -->
+      <div class="footer-bottom">
+        <div class="contact-item">
+          <span>Телефон:</span>
+          <a href="tel:+79201128939">+7 (920) 112-89-39</a>
+        </div>
+        <div class="contact-item">
+          <span>Email:</span>
+          <a href="mailto:kuznitsa3d@yandex.ru">kuznitsa3d@yandex.ru</a>
+        </div>
+        <div class="contact-item">
+          <span>Город:</span> Ярославль (доставка СДЭК)
+        </div>
+      </div>
+    </div>
+  </footer>
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const btn = form.querySelector('button[type="submit"]');
+      const originalText = btn.textContent;
+
+      btn.textContent = 'Отправка...';
+      btn.disabled = true;
+      btn.style.background = '';
+
+      try {
+        // Берем адрес из формы и меняем на ajax-версию
+        const response = await fetch(form.action.replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+        const data = await response.json();
+
+        if (String(data.success) === 'true') {
+          btn.textContent = '✓ Заявка отправлена!';
+          btn.style.background = '#22c55e';
+          form.reset();
+        } else {
+          // ПОКАЖЕТ ТОЧНУЮ ОШИБКУ СЕРВИСА
+          alert('Ответ сервера:\n\n' + JSON.stringify(data, null, 2));
+          btn.textContent = 'Ошибка: ' + (data.message || 'см. всплывающее окно');
+          btn.style.background = '#ef4444';
+        }
+      } catch (err) {
+        alert('Ошибка сети:\n\n' + err.message);
+        btn.textContent = 'Ошибка сети';
+        btn.style.background = '#ef4444';
+      }
+
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 5000);
+    });
+
+    // === МАСКА ДЛЯ ТЕЛЕФОНА ===
+    const phoneInput = document.getElementById('phoneInput');
+    if (phoneInput) {
+      phoneInput.addEventListener('input', (e) => {
+        let val = e.target.value.replace(/\D/g, '');
+        if (val.startsWith('8')) val = '7' + val.slice(1);
+        if (!val.startsWith('7')) val = '7' + val;
+        val = val.slice(0, 11);
+        let formatted = '+7';
+        if (val.length > 1) formatted += ' (' + val.slice(1, 4);
+        if (val.length >= 5) formatted += ') ' + val.slice(4, 7);
+        if (val.length >= 8) formatted += '-' + val.slice(7, 9);
+        if (val.length >= 10) formatted += '-' + val.slice(9, 11);
+        e.target.value = formatted;
+      });
+      phoneInput.addEventListener('focus', (e) => {
+        if (!e.target.value) e.target.value = '+7 (';
+      });
+    }
+
+  </script>
+    </body>
+</html>
