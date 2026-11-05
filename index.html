@@ -453,10 +453,16 @@
         <h3>Оставить заявку</h3>
         <p>Заполните форму — я свяжусь с вами в течение дня</p>
 
-        <!-- ВАЖНО: Замени ТВОЯ_ПОЧТА на свой реальный email в action="" -->
+        <!-- Плашка с инструкцией для файлов -->
+        <div style="background: rgba(246, 206, 44, 0.08); border: 1px dashed var(--accent); padding: 12px 16px; border-radius: 8px; font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; text-align: center;">
+          Если у вас есть 3D-модели, пришлите их на почту 
+          <a href="mailto:kuznitsa3d@yandex.ru" style="color: var(--accent); font-weight: 600; text-decoration: none;">kuznitsa3d@yandex.ru</a> 
+          или в любой из указанных мессенджеров выше.
+        </div>
+
         <form id="contactForm" class="contact-form" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
           
-          <!-- ВСТАВЬТЕ СВОЙ КЛЮЧ WEB3FORMS НИЖЕ -->
+          <!-- Твой ключ Web3Forms (он у тебя уже должен быть вставлен) -->
           <input type="hidden" name="access_key" value="57dac171-ce1e-4461-aecc-e482836b0733">
           <input type="hidden" name="subject" value="Новая заявка с сайта 3D-кузница">
           <input type="hidden" name="from_name" value="3D-кузница">
@@ -477,15 +483,12 @@
             <input type="email" name="email" placeholder="you@example.ru">
           </div>
 
-            <div class="form-group">
-              <label>3D-модели и файлы</label>
-              <div style="background: rgba(246, 206, 44, 0.08); border: 1px dashed var(--accent); padding: 10px 14px; border-radius: 8px; font-size: 13px; color: var(--text-muted); line-height: 1.4; display: flex; align-items: center; height: 100%; box-sizing: border-box;">
-                <span>Есть 3D-модели? Пришлите их на почту <a href="mailto:kuznitsa3d@yandex.ru" style="color: var(--accent); font-weight: 600; text-decoration: none;">kuznitsa3d@yandex.ru.ru</a> или в любой из мессенджеров выше.</span>
-              </div>
-            </div>
+          <div class="form-group">
+            <label>Сообщение *</label>
+            <textarea name="message" placeholder="Опишите, что нужно напечатать: размер, материал, сроки..." required></textarea>
           </div>
 
-
+          <!-- ВОТ ЗДЕСЬ ДОЛЖНА БЫТЬ КНОПКА И ТЕКСТ (ВНУТРИ ФОРМЫ) -->
           <button type="submit" class="btn btn-primary btn-submit">Отправить заявку</button>
 
           <p class="form-privacy">
